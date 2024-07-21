@@ -1,29 +1,5 @@
 import unittest
-from typing import List, Tuple, Dict
-
-
-def rate_similarity(a: Tuple[str], b: Tuple[str]) -> float:
-    set_a = set(a)
-    set_b = set(b)
-    intersection = set_a.intersection(set_b)
-    union = set_a.union(set_b)
-    return float(len(intersection)) / len(union) if len(union) != 0 else 0
-
-
-def evaluate_duplicates(
-    data: List[Tuple[str]], threshold: float
-) -> Dict[Tuple[str], List[Tuple[Tuple[str], float]]]:
-    duplicates = {}
-    for i, tuple_a in enumerate(data):
-        for j, tuple_b in enumerate(data):
-            if i < j:  # Compare each pair only once
-                similarity = rate_similarity(tuple_a, tuple_b)
-                if similarity >= threshold:
-                    if tuple_a not in duplicates:
-                        duplicates[tuple_a] = []
-                    duplicates[tuple_a].append((tuple_b, similarity))
-    return duplicates
-
+from duplicates import rate_similarity, evaluate_duplicates
 
 class TestEvaluateDuplicates(unittest.TestCase):
 
